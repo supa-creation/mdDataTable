@@ -9,7 +9,7 @@
     <td class="checkboxCell" ng-show="selectableRows"
         ng-include="'/main/templates/cells/generateCheckboxCell.html'"></td>
 
-    <td class="column"
+    <td class="column mdTable-td-{{index}}"
         ng-repeat="cellData in rowData.data track by $index"
         mdt-add-align-class="dataStorage.header[$index].alignRule"
         style="position:relative;"
