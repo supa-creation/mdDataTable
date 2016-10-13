@@ -1,22 +1,25 @@
 <tr class="theadTrRow"
     mdt-animate-sort-icon-handler>
 
-    <!-- TODO: fix text-align:left, in theory it should not be there to make it work -->
-    <th class="checkboxCell"
-        style="text-align:left;"
-        ng-show="selectableRows"
-        mdt-select-all-rows-handler>
+  <!-- TODO: fix text-align:left, in theory it should not be there to make it work -->
+  <th class="mdt-th-select"
+      style="text-align:left;"
+      ng-show="mdt.opt().selectable"
+      mdt-select-all-rows-handler>
 
-        <md-checkbox aria-label="select all" ng-model="selectAllRows" ng-change="onCheckboxChange()"></md-checkbox>
-    </th>
+    <md-checkbox aria-label="select all" ng-model="selectAllRows" ng-change="onCheckboxChange()"></md-checkbox>
+  </th>
 
-    <th class="column"
-        ng-repeat="headerRowData in dataStorage.header track by $index"
-        ng-class="{'clickable': sortableColumns}"
-        mdt-add-align-class="headerRowData.alignRule"
-        mdt-sort-handler
-        md-ink-ripple="{{ rippleEffectCallback() }}">
+  <th
+    ng-class="{
+          'clickable': clickable,
+          'mdt-t{{headerRowData.alignRule}}': true
+        }"
+    ng-init="clickable = mdt.opt().sortable && !dataStorage.header[$index].noSort"
+    ng-repeat="headerRowData in dataStorage.header track by $index"
+    md-ink-ripple="{{clickable}}"
+    mdt-sort-handler>
 
-        <mdt-generated-header-cell-content></mdt-generated-header-cell-content>
-    </th>
+    <mdt-generated-header-cell-content></mdt-generated-header-cell-content>
+  </th>
 </tr>

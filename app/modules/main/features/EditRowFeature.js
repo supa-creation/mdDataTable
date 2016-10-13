@@ -10,7 +10,6 @@
             $scope.saveRow = function(rowData){
                 var rawRowData = ctrl.dataStorage.getSavedRowData(rowData);
 
-                $scope.saveRowCallback({row: rawRowData});
             };
 
             $scope.showEditDialog = function(ev, cellData, rowData){
@@ -28,8 +27,7 @@
                     focusOnOpen: false,
                     locals: {
                         position: position,
-                        cellData: JSON.parse(JSON.stringify(cellData)),
-                        mdtTranslations: $scope.mdtTranslations
+                        cellData: JSON.parse(JSON.stringify(cellData))
                     }
                 };
 

@@ -13,7 +13,6 @@
         });
 
         $scope.cellData = cellData;
-        $scope.mdtTranslations = mdtTranslations;
 
         $scope.saveRow = saveRow;
         $scope.cancel = cancel;

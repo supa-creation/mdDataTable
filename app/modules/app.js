@@ -29,10 +29,10 @@
      *
      * 4. Rows resolution
      *
-     *     4.1. `mdtRow` controller(s)
+     *     4.1. `mdtRows` controller(s)
      *              - public function created which able to add a cell data to the locally stored array
      *
-     *     4.2. `mdtRow` link(s)
+     *     4.2. `mdtRows` link(s)
      *              - transclude all `mdtCell` directive's generated  contents
      *              - add the collected row data to the service by the help of `mdtTable` public API
      *

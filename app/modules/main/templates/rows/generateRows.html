@@ -2,27 +2,29 @@
 
 
 <tr class="tbodyTrRow"
-    ng-repeat="rowData in mdtPaginationHelper.getRows() track by $index"
+    ng-repeat="rowData in mdt.paginator().getRows() track by $index"
     ng-class="{'selectedRow': rowData.optionList.selected, '{{rowData.optionList.className}}': rowData.optionList.className }"
-    ng-show="(isPaginationEnabled() === false || rowData.optionList.visible === true) && rowData.optionList.deleted === false">
+    ng-show="(!mdt.opt().paginate || rowData.optionList.visible === true) && rowData.optionList.deleted === false">
 
-    <td class="checkboxCell" ng-show="selectableRows"
+    <td class="mdt-td-select" ng-show="mdt.opt().selectable"
         ng-include="'/main/templates/cells/generateCheckboxCell.html'"></td>
 
-    <td class="column mdTable-td-{{index}}"
-        ng-repeat="cellData in rowData.data track by $index"
-        mdt-add-align-class="dataStorage.header[$index].alignRule"
-        style="position:relative;"
-        ng-include src="'/main/templates/cells/generateCell.html'">
+    <td
+      ng-include src="'/main/templates/cells/generateCell.html'"
+      ng-repeat="cellData in rowData.data track by $index"
+      ng-class="{
+        'mdt-td-{{cellData.columnKey}}': true,
+        'mdt-t{{dataStorage.header[$index].alignRule}}': true
+      }">
         <!-- generate cell content -->
     </td>
 </tr>
 
-<tr ng-show="mdtPaginationHelper.isLoading"
+<tr ng-show="mdt.paginator().isLoading"
     ng-include src="'/main/templates/rows/loadingIndicator.html'"></tr>
 
-<tr ng-show="mdtPaginationHelper.isLoadError"
+<tr ng-show="mdt.paginator().isLoadError"
     ng-include src="'/main/templates/rows/errorIndicator.html'"></tr>
 
-<tr ng-show="mdtPaginationHelper.isNoResults && !mdtPaginationHelper.isLoadError"
+<tr ng-show="mdt.paginator().isNoResults && !mdt.paginator().isLoadError"
     ng-include src="'/main/templates/rows/noResultIndicator.html'"></tr>

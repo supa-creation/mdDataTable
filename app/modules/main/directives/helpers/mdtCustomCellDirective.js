@@ -12,7 +12,7 @@
                     transclude(function (clone) {
                         var columnKey = attrs.columnKey;
 
-                        ctrl.dataStorage.customCells[columnKey] = {
+                        ctrl.mdt.getStorage().customCells[columnKey] = {
                             scope: $scope,
                             htmlContent: clone.clone()
                         };

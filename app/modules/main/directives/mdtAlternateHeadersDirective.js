@@ -1,28 +1,31 @@
-(function(){
-    'use strict';
+(function () {
+  'use strict';
 
-    function mdtAlternateHeadersDirective(_){
-        return {
-            restrict: 'E',
-            templateUrl: '/main/templates/mdtAlternateHeaders.html',
-            transclude: true,
-            replace: true,
-            scope: true,
-            require: '^mdtTable',
-            link: function($scope, element, attrs, ctrl){
-                $scope.deleteSelectedRows = deleteSelectedRows;
-                $scope.getNumberOfSelectedRows = _.bind(ctrl.dataStorage.getNumberOfSelectedRows, ctrl.dataStorage);
+  function mdtAlternateHeadersDirective(_) {
+    return {
+      restrict: 'E',
+      templateUrl: '/main/templates/mdtAlternateHeaders.html',
+      transclude: true,
+      replace: true,
+      scope: false,
+      require: '^mdtTable',
+      link: function ($scope, element, attrs, ctrl) {
+        var mdtStorage = ctrl.mdt.getStorage();
 
-                function deleteSelectedRows(){
-                    var deletedRows = ctrl.dataStorage.deleteSelectedRows();
+        $scope.getNumberOfSelectedRows = _.bind(mdtStorage.getNumberOfSelectedRows, mdtStorage);
 
-                    $scope.deleteRowCallback({rows: deletedRows});
-                }
-            }
-        };
-    }
+        $scope.deleteSelectedRows = function () {
+          var deletedRows = mdtStorage.deleteSelectedRows().then(function(rows) {
 
-    angular
-        .module('mdDataTable')
-        .directive('mdtAlternateHeaders', mdtAlternateHeadersDirective);
+          }, function(){
+
+          });
+        }
+      }
+    };
+  }
+
+  angular
+    .module('mdDataTable')
+    .directive('mdtAlternateHeaders', mdtAlternateHeadersDirective);
 }());

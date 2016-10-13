@@ -1,4 +1,4 @@
-<div class="mdt-footer" layout="row" ng-show="isPaginationEnabled()">
+<div class="mdt-footer" layout="row" ng-show="mdt.opt().paginate">
     <div class="mdt-pagination"
          layout="row"
          layout-align="end center"
@@ -7,19 +7,19 @@
         <span layout-margin>{{mdtTranslations.rowsPerPage}}</span>
         <md-input-container>
             <md-select ng-model="rowsPerPage" aria-label="rows per page">
-                <md-option ng-value="pageSize" ng-repeat="pageSize in mdtPaginationHelper.rowsPerPageValues">{{pageSize}}</md-option>
+                <md-option ng-value="pageSize" ng-repeat="pageSize in mdt.paginator().rowsPerPageValues">{{pageSize}}</md-option>
             </md-select>
         </md-input-container>
 
         <span layout-margin>
-            {{mdtPaginationHelper.getStartRowIndex()+1}}-{{mdtPaginationHelper.getEndRowIndex()+1}} of {{mdtPaginationHelper.getTotalRowsCount()}}
+            {{mdt.paginator().getStartRowIndex()+1}}-{{mdt.paginator().getEndRowIndex()+1}} {{mdt.translations.of}} {{mdt.paginator().getTotalRowsCount()}}
         </span>
 
-        <md-button class="md-icon-button md-primary" ng-class="{'md-inactive': !mdtPaginationHelper.hasPreviousPage()}" aria-label="Previous page" ng-click="mdtPaginationHelper.previousPage()">
+        <md-button class="md-icon-button md-primary" ng-class="{'md-inactive': !mdt.paginator().hasPreviousPage()}" aria-label="{{mdt.translations.previousPage}}" ng-click="mdt.paginator().previousPage()">
             <ng-md-icon icon="keyboard_arrow_left" size="24"></ng-md-icon>
         </md-button>
 
-        <md-button class="md-icon-button md-primary" ng-class="{'md-inactive': !mdtPaginationHelper.hasNextPage()}" aria-label="Next page" ng-click="mdtPaginationHelper.nextPage()">
+        <md-button class="md-icon-button md-primary" ng-class="{'md-inactive': !mdt.paginator().hasNextPage()}" aria-label="{{mdt.translation.nextPage}}" ng-click="mdt.paginator().nextPage()">
             <ng-md-icon icon="keyboard_arrow_right" size="24"></ng-md-icon>
         </md-button>
     </div>

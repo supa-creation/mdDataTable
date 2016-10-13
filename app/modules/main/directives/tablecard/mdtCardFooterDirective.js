@@ -1,27 +1,27 @@
-(function(){
-    'use strict';
+(function () {
+  'use strict';
 
-    function mdtCardFooterDirective(){
-        return {
-            restrict: 'E',
-            templateUrl: '/main/templates/mdtCardFooter.html',
-            transclude: true,
-            replace: true,
-            scope: true,
-            require: ['^mdtTable'],
-            link: function($scope){
-                $scope.rowsPerPage = $scope.mdtPaginationHelper.rowsPerPage;
+  function mdtCardFooterDirective() {
+    return {
+      restrict: 'E',
+      templateUrl: '/main/templates/mdtCardFooter.html',
+      transclude: true,
+      replace: true,
+      scope: true,
+      require: ['^mdtTable'],
+      link: function ($scope) {
+        var paginator = $scope.mdt.paginator();
 
-                $scope.$watch('rowsPerPage', function(newVal, oldVal){
-                    if(newVal !== oldVal){
-                        $scope.mdtPaginationHelper.setRowsPerPage(newVal);
-                    }
-                });
-            }
-        };
-    }
+        $scope.rowsPerPage = paginator.rowsPerPage;
 
-    angular
-        .module('mdDataTable')
-        .directive('mdtCardFooter', mdtCardFooterDirective);
+        $scope.$watch('rowsPerPage', function (rowsPerPage) {
+          paginator.setRowsPerPage(rowsPerPage);
+        });
+      }
+    };
+  }
+
+  angular
+    .module('mdDataTable')
+    .directive('mdtCardFooter', mdtCardFooterDirective);
 }());

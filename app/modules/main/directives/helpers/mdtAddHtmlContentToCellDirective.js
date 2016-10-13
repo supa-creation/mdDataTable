@@ -21,8 +21,8 @@
 
                     // ctrl doesn't exist on the first row, making html content impossible to show up.
                     // TODO: make it as a global service .... I know but any better idea?
-                    if(originalValue.columnKey && ctrl && ctrl.dataStorage.customCells[originalValue.columnKey]){
-                        var customCellData = ctrl.dataStorage.customCells[originalValue.columnKey];
+                    if(originalValue.columnKey && ctrl && ctrl.mdt.getStorage().customCells[originalValue.columnKey]){
+                        var customCellData = ctrl.mdt.getStorage().customCells[originalValue.columnKey];
 
                         var clonedHtml = customCellData.htmlContent;
 

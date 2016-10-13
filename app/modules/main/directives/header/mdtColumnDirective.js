@@ -58,15 +58,18 @@
                     // directive creates an isolate scope so use parent scope to resolve variables.
                     var cellValue = $interpolate(clone.html())($scope.$parent);
                     var cellDataToStore = {
-                        alignRule: $scope.alignRule,
-                        sortBy: $scope.sortBy,
-                        columnDefinition: $scope.columnDefinition,
-                        columnName: cellValue
+                      alignRule: $scope.alignRule,
+                      sortBy: $scope.sortBy,
+                      columnDefinition: $scope.columnDefinition,
+                      columnName: cellValue,
+                      noSort: angular.isDefined(attrs['mdtNoSort'])
                     };
 
-                    ColumnFilterFeature.appendHeaderCellData($scope, cellDataToStore, mdtTableCtrl.dataStorage, element);
+                    var mdtStorage = mdtTableCtrl.mdt.getStorage();
 
-                    mdtTableCtrl.dataStorage.addHeaderCellData(cellDataToStore);
+                    ColumnFilterFeature.appendHeaderCellData($scope, cellDataToStore, mdtStorage, element);
+
+                  mdtStorage.addHeaderCellData(cellDataToStore);
                 });
             }
         };

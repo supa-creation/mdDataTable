@@ -78,7 +78,7 @@
 
                 headerData.columnFilter.filtersApplied = params.selectedItems;
 
-                if($scope.mdtRowPaginator){
+                if($scope.mdtPaginateHandler){
                     parentCtrl.mdtPaginationHelper.fetchPage(1);
                 }else{
                     // no support for non-ajax yet
